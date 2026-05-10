@@ -4,7 +4,6 @@ test("Trying to Login with Invalid credentials", async ({browser}) => {
 
     const context = await browser.newContext();
     const page = await context.newPage();
-
     await page.goto("https://rahulshettyacademy.com/loginpagePractise/");
     const username_field = page.locator("#username");
     const password_field = page.locator("[name='password']");
@@ -17,6 +16,19 @@ test("Trying to Login with Invalid credentials", async ({browser}) => {
     await error_message.isVisible();
     console.log(await error_message.textContent()); 
     await expect(error_message).toContainText("Incorrect username/password.");  
+})
 
-}
-)
+test("Trying to Login with Valid credentials", async({browser}) =>{
+    const context = await browser.newContext();
+    const page = await context.newPage();
+    await page.goto("https://rahulshettyacademy.com/loginpagePractise/");
+    
+    const username_field = page.locator("#username");
+    const password_field = page.locator("[name='password']");
+    const signIn_button = page.locator("#signInBtn");
+
+    await username_field.fill("rahulshettyacademy");
+    await password_field.fill("Learning@830$3mK2");
+    await signIn_button.click();
+    await expect(page).toHaveURL("https://rahulshettyacademy.com/angularpractice/shop");
+})

@@ -5,15 +5,14 @@ const config =({
   testDir: './tests',
   timeout: 40 *1000,
   expect: {
-    timeout: 5000
+    timeout: 10000
   },
 
   reporter: 'html',
   use:{
     browserName: 'chromium',
-    headless: true,
+    headless: false,
   }
-
 });
 
 export default config;
