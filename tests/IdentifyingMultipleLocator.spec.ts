@@ -19,7 +19,7 @@ test("Identifying Multiple Locators", async({browser}) => {
     const product_title= page.locator('.card-title a');
     const product_titles_count = await product_title.count();
 
-    //Extracting all the details of the products and printing them in console
+    //Extracting all the details of the products and printing them in consolegit 
     for( let i=0; i<product_titles_count ; i++){
         console.log(await product_title.locator('nth ='+i ).textContent());
     }
