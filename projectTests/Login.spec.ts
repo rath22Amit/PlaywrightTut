@@ -91,5 +91,7 @@ test("End To End Test for E-commerce site", async({browser}) =>{
     const order_id= page.locator("label.ng-star-inserted").first();
     await order_history_button.click();
     await page.waitForLoadState("networkidle");
+
+    //Validate the order is present in the order history page
     
 })
