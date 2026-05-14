@@ -72,26 +72,37 @@ test("End To End Test for E-commerce site", async({browser}) =>{
     await expect(coupon_applied_message).toContainText("* Coupon Applied");
     await select_country.pressSequentially("india",{delay:500});
     await page.keyboard.press("ArrowDown"  ,{delay:1000});
-    
     await page.keyboard.press("Enter");
 
     //Clicking on the Place Order Button
     const place_order_button = page.locator("div.actions a");
     await place_order_button.click();
     await page.waitForLoadState("networkidle");
-   
 
     //Verify the order is placed successfully
     const order_confirmation_message = page.locator("h1");
     await expect(order_confirmation_message).toBeVisible();
     await expect(order_confirmation_message).toHaveText(" Thankyou for the order. ");
 
+    //Fetching the orderID
+    const rawOrderIds = await page.locator(".em-spacer-1 label.ng-star-inserted").allTextContents();
+    const my_order_ids = rawOrderIds.map(text => text.replace(/\|/g, "").trim());
+  
     //Click on Order History and verify the order is present in the order history page
     const order_history_button = page.locator("button[routerlink='/dashboard/myorders']");
-    const order_id= page.locator("label.ng-star-inserted").first();
+    const order_id= page.locator("label.ng-star-inserted");
     await order_history_button.click();
     await page.waitForLoadState("networkidle");
 
     //Validate the order is present in the order history page
+
+    await page.waitForTimeout(2000);
+    const order_history_id = await page.locator("tbody tr th").allTextContents();
+    for(const id of my_order_ids){
+        expect(order_history_id).toContain(id);
+    }
+
+    console.log("Order id verified in the order history page");
+
     
 })
