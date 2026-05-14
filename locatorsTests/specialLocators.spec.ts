@@ -20,4 +20,10 @@ test("Special Locators", async({browser}) =>{
     await gender_dropdown.selectOption("Female");
     await employement_status_employed.check();
 
+    await page.getByRole("button", {name: "Submit"}).click();
+    
+    await page.getByRole("link", {name: "Shop"}).click();
+    await page.waitForTimeout(2000);
+    await page.locator("app-card").filter({hasText:"Nokia Edge"}).getByRole("button").click();
+    
 })
