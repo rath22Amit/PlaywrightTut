@@ -72,6 +72,7 @@ test("End To End Test for E-commerce site", async({browser}) =>{
     await expect(coupon_applied_message).toContainText("* Coupon Applied");
     await select_country.pressSequentially("india",{delay:500});
     await page.keyboard.press("ArrowDown"  ,{delay:1000});
+    await page.keyboard.press("ArrowDown"  ,{delay:1000})
     await page.keyboard.press("Enter");
 
     //Clicking on the Place Order Button

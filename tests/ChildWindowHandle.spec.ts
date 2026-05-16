@@ -13,4 +13,5 @@ test.only("Child Window Handle", async({browser}) =>{
     ]);
     
     console.log(await newPage.title());
+    await expect(newPage).toHaveTitle("RS Academy");
 })

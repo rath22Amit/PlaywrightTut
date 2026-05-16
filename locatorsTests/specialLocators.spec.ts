@@ -26,4 +26,5 @@ test("Special Locators", async({browser}) =>{
     await page.waitForTimeout(2000);
     await page.locator("app-card").filter({hasText:"Nokia Edge"}).getByRole("button").click();
     
+    
 })
